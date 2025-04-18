@@ -4,24 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار الذكاء</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
         /* التنسيقات العامة */
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        
+        body {
+            font-family: 'Markazi Text', 'Readex Pro', sans-serif;
             background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+            color: #2c3e50;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         /* التوب بار */
         .top-bar {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: white;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -35,77 +45,116 @@
         }
         
         .logo {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #2c3e50;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
         }
         
         .platform-name {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         
         /* المحتوى الرئيسي */
         .container {
             max-width: 800px;
-            margin: 2rem auto;
+            margin: 2.5rem auto;
             padding: 2rem;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            flex: 1;
         }
         
-        h1, h2, h3 {
+        h1 {
             color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .intro-text {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
         
         .question {
             background-color: #f8f9fa;
-            padding: 1.5rem;
+            padding: 1.8rem;
             margin-bottom: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h3 {
+            margin-bottom: 1.2rem;
+            color: #2c3e50;
+            font-size: 1.3rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
         }
         
         input[type="radio"] {
-            margin-left: 10px;
+            margin-left: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
         
         label {
             cursor: pointer;
-            display: inline-block;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            flex: 1;
         }
         
         .submit-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(41, 128, 185, 0.3);
         }
         
         /* الفوتر */
         .site-footer {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: #ecf0f1;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 2.5rem 0;
+            margin-top: auto;
         }
         
         .footer-content {
@@ -114,79 +163,74 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            padding: 0 1rem;
+            padding: 0 2rem;
+            gap: 2rem;
         }
         
         .footer-section {
             flex: 1;
             min-width: 250px;
-            margin-bottom: 1rem;
+        }
+        
+        .footer-info {
             text-align: center;
+        }
+        
+        .copyright {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .developer {
+            color: #3498db;
+            font-weight: 600;
         }
         
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
+            align-items: center;
         }
         
         .footer-link {
             color: #bdc3c7;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-link:hover {
             color: #3498db;
         }
         
-        .developer {
-            color: #3498db;
-            font-weight: bold;
-        }
-        
-        /* نتائج الاختبار */
-        .result {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        
-        .excellent {
-            background-color: rgba(39, 174, 96, 0.1);
-            color: #27ae60;
-        }
-        
-        .good {
-            background-color: rgba(241, 196, 15, 0.1);
-            color: #f39c12;
-        }
-        
-        .average {
-            background-color: rgba(230, 126, 34, 0.1);
-            color: #e67e22;
-        }
-        
-        .poor {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-        }
-        
         /* التجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
             .container {
-                margin: 1rem;
-                padding: 1rem;
-            }
-            
-            .logo-container {
-                flex-direction: column;
-                gap: 5px;
+                margin: 1.5rem;
+                padding: 1.5rem;
             }
             
             .platform-name {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+            }
+            
+            .question {
+                padding: 1.3rem;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -195,7 +239,7 @@
     <!-- التوب بار -->
     <header class="top-bar">
         <div class="logo-container">
-            <div class="logo">IQ</div>
+            <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/iq-test/iq-test.png" alt="شعار اختبار الذكاء" class="logo">
             <h1 class="platform-name">اختبارات الذكاء</h1>
         </div>
     </header>
@@ -203,97 +247,237 @@
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <h1>اختبار الذكاء</h1>
-        <p>اختبار مكون من 10 أسئلة لقياس مستوى الذكاء</p>
+        <p class="intro-text">اختبار مكون من 10 أسئلة لقياس مستوى الذكاء</p>
         
         <form id="iqTestForm">
             <!-- السؤال 1 -->
             <div class="question">
                 <h3>1. ما هو الرقم التالي في المتتالية: 2, 4, 6, 8, ...؟</h3>
-                <input type="radio" name="q1" value="a" id="q1a" required> <label for="q1a">9</label><br>
-                <input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">10</label><br>
-                <input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">12</label><br>
-                <input type="radio" name="q1" value="d" id="q1d"> <label for="q1d">14</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" value="a" id="q1a" required>
+                        <label for="q1a">9</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="b" id="q1b">
+                        <label for="q1b">10</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="c" id="q1c">
+                        <label for="q1c">12</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="d" id="q1d">
+                        <label for="q1d">14</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 2 -->
             <div class="question">
                 <h3>2. ما هي الكلمة التي لا تنتمي للمجموعة: تفاح، موز، برتقال، جزر؟</h3>
-                <input type="radio" name="q2" value="a" id="q2a" required> <label for="q2a">تفاح</label><br>
-                <input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">موز</label><br>
-                <input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">برتقال</label><br>
-                <input type="radio" name="q2" value="d" id="q2d"> <label for="q2d">جزر</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" value="a" id="q2a" required>
+                        <label for="q2a">تفاح</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="b" id="q2b">
+                        <label for="q2b">موز</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="c" id="q2c">
+                        <label for="q2c">برتقال</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="d" id="q2d">
+                        <label for="q2d">جزر</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 3 -->
             <div class="question">
                 <h3>3. إذا كان اليوم الأربعاء، فما اليوم بعد غدٍ؟</h3>
-                <input type="radio" name="q3" value="a" id="q3a" required> <label for="q3a">الخميس</label><br>
-                <input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">الجمعة</label><br>
-                <input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">السبت</label><br>
-                <input type="radio" name="q3" value="d" id="q3d"> <label for="q3d">الأحد</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" value="a" id="q3a" required>
+                        <label for="q3a">الخميس</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="b" id="q3b">
+                        <label for="q3b">الجمعة</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="c" id="q3c">
+                        <label for="q3c">السبت</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="d" id="q3d">
+                        <label for="q3d">الأحد</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 4 -->
             <div class="question">
                 <h3>4. ما هو الشكل الناقص في المتتالية: □, △, ○, □, △, ؟</h3>
-                <input type="radio" name="q4" value="a" id="q4a" required> <label for="q4a">□</label><br>
-                <input type="radio" name="q4" value="b" id="q4b"> <label for="q4b">△</label><br>
-                <input type="radio" name="q4" value="c" id="q4c"> <label for="q4c">○</label><br>
-                <input type="radio" name="q4" value="d" id="q4d"> <label for="q4d">☆</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" value="a" id="q4a" required>
+                        <label for="q4a">□</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="b" id="q4b">
+                        <label for="q4b">△</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="c" id="q4c">
+                        <label for="q4c">○</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="d" id="q4d">
+                        <label for="q4d">☆</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 5 -->
             <div class="question">
                 <h3>5. إذا كانت الساعة 3:15، ما هي الزاوية بين عقرب الساعات والدقائق؟</h3>
-                <input type="radio" name="q5" value="a" id="q5a" required> <label for="q5a">0 درجة</label><br>
-                <input type="radio" name="q5" value="b" id="q5b"> <label for="q5b">7.5 درجة</label><br>
-                <input type="radio" name="q5" value="c" id="q5c"> <label for="q5c">15 درجة</label><br>
-                <input type="radio" name="q5" value="d" id="q5d"> <label for="q5d">30 درجة</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" value="a" id="q5a" required>
+                        <label for="q5a">0 درجة</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="b" id="q5b">
+                        <label for="q5b">7.5 درجة</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="c" id="q5c">
+                        <label for="q5c">15 درجة</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="d" id="q5d">
+                        <label for="q5d">30 درجة</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 6 -->
             <div class="question">
                 <h3>6. ما هو العدد الذي إذا ضربته في نفسه وأضفت إليه 5 يصبح الناتج 30؟</h3>
-                <input type="radio" name="q6" value="a" id="q6a" required> <label for="q6a">3</label><br>
-                <input type="radio" name="q6" value="b" id="q6b"> <label for="q6b">4</label><br>
-                <input type="radio" name="q6" value="c" id="q6c"> <label for="q6c">5</label><br>
-                <input type="radio" name="q6" value="d" id="q6d"> <label for="q6d">6</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" value="a" id="q6a" required>
+                        <label for="q6a">3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="b" id="q6b">
+                        <label for="q6b">4</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="c" id="q6c">
+                        <label for="q6c">5</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="d" id="q6d">
+                        <label for="q6d">6</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 7 -->
             <div class="question">
                 <h3>7. ما هي الكلمة المقابلة لـ "ليل"؟</h3>
-                <input type="radio" name="q7" value="a" id="q7a" required> <label for="q7a">صباح</label><br>
-                <input type="radio" name="q7" value="b" id="q7b"> <label for="q7b">ضحى</label><br>
-                <input type="radio" name="q7" value="c" id="q7c"> <label for="q7c">نهار</label><br>
-                <input type="radio" name="q7" value="d" id="q7d"> <label for="q7d">مساء</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" value="a" id="q7a" required>
+                        <label for="q7a">صباح</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="b" id="q7b">
+                        <label for="q7b">ضحى</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="c" id="q7c">
+                        <label for="q7c">نهار</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="d" id="q7d">
+                        <label for="q7d">مساء</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 8 -->
             <div class="question">
                 <h3>8. إذا كان أ > ب و ب > ج، فما العلاقة بين أ و ج؟</h3>
-                <input type="radio" name="q8" value="a" id="q8a" required> <label for="q8a">أ > ج</label><br>
-                <input type="radio" name="q8" value="b" id="q8b"> <label for="q8b">أ < ج</label><br>
-                <input type="radio" name="q8" value="c" id="q8c"> <label for="q8c">أ = ج</label><br>
-                <input type="radio" name="q8" value="d" id="q8d"> <label for="q8d">لا يمكن تحديدها</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" value="a" id="q8a" required>
+                        <label for="q8a">أ > ج</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="b" id="q8b">
+                        <label for="q8b">أ < ج</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="c" id="q8c">
+                        <label for="q8c">أ = ج</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="d" id="q8d">
+                        <label for="q8d">لا يمكن تحديدها</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 9 -->
             <div class="question">
                 <h3>9. كم مثلثًا في الشكل التالي: △△△؟</h3>
-                <input type="radio" name="q9" value="a" id="q9a" required> <label for="q9a">1</label><br>
-                <input type="radio" name="q9" value="b" id="q9b"> <label for="q9b">2</label><br>
-                <input type="radio" name="q9" value="c" id="q9c"> <label for="q9c">3</label><br>
-                <input type="radio" name="q9" value="d" id="q9d"> <label for="q9d">6</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q9" value="a" id="q9a" required>
+                        <label for="q9a">1</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="b" id="q9b">
+                        <label for="q9b">2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="c" id="q9c">
+                        <label for="q9c">3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="d" id="q9d">
+                        <label for="q9d">6</label>
+                    </div>
+                </div>
             </div>
             
             <!-- السؤال 10 -->
             <div class="question">
                 <h3>10. ما هو الشيء الذي كلما أخذت منه كبر أكثر؟</h3>
-                <input type="radio" name="q10" value="a" id="q10a" required> <label for="q10a">الحفرة</label><br>
-                <input type="radio" name="q10" value="b" id="q10b"> <label for="q10b">الصخر</label><br>
-                <input type="radio" name="q10" value="c" id="q10c"> <label for="q10c">الكتاب</label><br>
-                <input type="radio" name="q10" value="d" id="q10d"> <label for="q10d">الشجرة</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q10" value="a" id="q10a" required>
+                        <label for="q10a">الحفرة</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="b" id="q10b">
+                        <label for="q10b">الصخر</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="c" id="q10c">
+                        <label for="q10c">الكتاب</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="d" id="q10d">
+                        <label for="q10d">الشجرة</label>
+                    </div>
+                </div>
             </div>
             
             <button type="submit" class="submit-btn">احسب نتيجتي</button>
@@ -303,8 +487,8 @@
     <!-- الفوتر -->
     <footer class="site-footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <p>&copy; <span id="year"></span> جاسم الفارسي جميع الحقوق محفوظة.</p>
+            <div class="footer-section footer-info">
+                <p class="copyright">&copy; <span id="year"></span> اختبارات الذكاء. جميع الحقوق محفوظة.</p>
                 <p>تم التطوير بواسطة: <span class="developer">فريق التطوير</span></p>
             </div>
             <div class="footer-section">
