@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتيجة اختبار الذكاء</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
-        /* نفس تنسيقات ملف index.html */
-        body {
-            font-family: 'Arial', sans-serif;
+        /* التنسيقات العامة */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
         }
         
+        body {
+            font-family: 'Markazi Text', 'Readex Pro', sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* التوب بار */
         .top-bar {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: white;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -34,56 +45,118 @@
         }
         
         .logo {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #2c3e50;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
         }
         
         .platform-name {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         
+        /* المحتوى الرئيسي */
         .container {
             max-width: 800px;
-            margin: 2rem auto;
+            margin: 2.5rem auto;
             padding: 2rem;
             background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            flex: 1;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            margin: 1.5rem auto;
+            max-width: 300px;
+        }
+        
+        .result-message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+        
+        .excellent {
+            color: #27ae60;
+            background-color: rgba(39, 174, 96, 0.1);
+            border: 2px solid #27ae60;
+        }
+        
+        .good {
+            color: #f39c12;
+            background-color: rgba(241, 196, 15, 0.1);
+            border: 2px solid #f39c12;
+        }
+        
+        .average {
+            color: #e67e22;
+            background-color: rgba(230, 126, 34, 0.1);
+            border: 2px solid #e67e22;
+        }
+        
+        .poor {
+            color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
         }
         
         .retry-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             text-align: center;
-            display: block;
             text-decoration: none;
+            display: block;
         }
         
         .retry-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(41, 128, 185, 0.3);
         }
         
+        /* الفوتر */
         .site-footer {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: #ecf0f1;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 2.5rem 0;
+            margin-top: auto;
         }
         
         .footer-content {
@@ -92,81 +165,75 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            padding: 0 1rem;
+            padding: 0 2rem;
+            gap: 2rem;
         }
         
         .footer-section {
             flex: 1;
             min-width: 250px;
-            margin-bottom: 1rem;
+        }
+        
+        .footer-info {
             text-align: center;
+        }
+        
+        .copyright {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .developer {
+            color: #3498db;
+            font-weight: 600;
         }
         
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
+            align-items: center;
         }
         
         .footer-link {
             color: #bdc3c7;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-link:hover {
             color: #3498db;
         }
         
-        .developer {
-            color: #3498db;
-            font-weight: bold;
-        }
-        
-        .result {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        
-        .excellent {
-            background-color: rgba(39, 174, 96, 0.1);
-            color: #27ae60;
-            border: 2px solid #27ae60;
-        }
-        
-        .good {
-            background-color: rgba(241, 196, 15, 0.1);
-            color: #f39c12;
-            border: 2px solid #f39c12;
-        }
-        
-        .average {
-            background-color: rgba(230, 126, 34, 0.1);
-            color: #e67e22;
-            border: 2px solid #e67e22;
-        }
-        
-        .poor {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-            border: 2px solid #e74c3c;
-        }
-        
+        /* التجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
             .container {
-                margin: 1rem;
-                padding: 1rem;
-            }
-            
-            .logo-container {
-                flex-direction: column;
-                gap: 5px;
+                margin: 1.5rem;
+                padding: 1.5rem;
             }
             
             .platform-name {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+            }
+            
+            .result-score {
+                font-size: 2rem;
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -175,7 +242,7 @@
     <!-- التوب بار -->
     <header class="top-bar">
         <div class="logo-container">
-            <div class="logo">IQ</div>
+            <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/iq-test/iq-test.png" alt="شعار اختبار الذكاء" class="logo">
             <h1 class="platform-name">اختبارات الذكاء</h1>
         </div>
     </header>
@@ -184,7 +251,7 @@
     <div class="container">
         <h1>نتيجة اختبار الذكاء</h1>
         
-        <div id="resultContainer"></div>
+        <div class="result-container" id="resultContainer"></div>
         
         <a href="index.html" class="retry-btn">إعادة الاختبار</a>
     </div>
@@ -192,8 +259,8 @@
     <!-- الفوتر -->
     <footer class="site-footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <p>&copy; <span id="year"></span> اختبارات الذكاء. جميع الحقوق محفوظة.</p>
+            <div class="footer-section footer-info">
+                <p class="copyright">&copy; <span id="year"></span> اختبارات الذكاء. جميع الحقوق محفوظة.</p>
                 <p>تم التطوير بواسطة: <span class="developer">فريق التطوير</span></p>
             </div>
             <div class="footer-section">
@@ -218,38 +285,31 @@
             
             let message = '';
             let resultClass = '';
+            let title = '';
             
             if (score >= 90) {
                 resultClass = 'excellent';
-                message = `
-                    <h2>مبروك!</h2>
-                    <p class="result ${resultClass}">نتيجتك ${score}/100</p>
-                    <p>مستوى ذكاءك عالي جدًا، لديك قدرات تحليلية ممتازة</p>
-                `;
+                title = 'مبروك!';
+                message = 'مستوى ذكاءك عالي جدًا، لديك قدرات تحليلية ممتازة';
             } else if (score >= 70) {
                 resultClass = 'good';
-                message = `
-                    <h2>نتيجة جيدة!</h2>
-                    <p class="result ${resultClass}">نتيجتك ${score}/100</p>
-                    <p>مستوى ذكاءك فوق المتوسط، لديك قدرات جيدة</p>
-                `;
+                title = 'نتيجة جيدة!';
+                message = 'مستوى ذكاءك فوق المتوسط، لديك قدرات جيدة';
             } else if (score >= 50) {
                 resultClass = 'average';
-                message = `
-                    <h2>نتيجة مقبولة</h2>
-                    <p class="result ${resultClass}">نتيجتك ${score}/100</p>
-                    <p>مستوى ذكاءك متوسط، يمكنك تطوير مهاراتك أكثر</p>
-                `;
+                title = 'نتيجة مقبولة';
+                message = 'مستوى ذكاءك متوسط، يمكنك تطوير مهاراتك أكثر';
             } else {
                 resultClass = 'poor';
-                message = `
-                    <h2>يحتاج تحسين</h2>
-                    <p class="result ${resultClass}">نتيجتك ${score}/100</p>
-                    <p>مستوى ذكاءك أقل من المتوسط، ننصحك بالتدرب أكثر</p>
-                `;
+                title = 'يحتاج تحسين';
+                message = 'مستوى ذكاءك أقل من المتوسط، ننصحك بالتدرب أكثر';
             }
             
-            resultContainer.innerHTML = message;
+            resultContainer.innerHTML = `
+                <h2 class="result-title">${title}</h2>
+                <div class="result-score ${resultClass}">${score}/100</div>
+                <p class="result-message">${message}</p>
+            `;
         });
     </script>
 </body>
