@@ -81,7 +81,7 @@
         .result-container {
             text-align: center;
             padding: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         
         .result-title {
@@ -101,7 +101,23 @@
         .result-message {
             font-size: 1.2rem;
             line-height: 1.8;
-            margin-top: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .result-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin: 1.5rem auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: block;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
         }
         
         .excellent {
@@ -278,7 +294,7 @@
         // إضافة سنة النشر تلقائياً
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // عرض النتيجة
+        // عرض النتيجة مع الصورة المناسبة
         document.addEventListener('DOMContentLoaded', function() {
             const score = localStorage.getItem('iqTestScore') || 0;
             const resultContainer = document.getElementById('resultContainer');
@@ -286,29 +302,41 @@
             let message = '';
             let resultClass = '';
             let title = '';
+            let imageUrl = '';
+            let imageCaption = '';
             
             if (score >= 90) {
                 resultClass = 'excellent';
-                title = 'مبروك!';
-                message = 'مستوى ذكاءك عالي جدًا، لديك قدرات تحليلية ممتازة';
+                title = 'عبقري!';
+                message = 'نتيجتك ممتازة! أنت تمتلك مستوى ذكاء عالي جداً. هذه النتيجة تضعك ضمن أعلى 5% من السكان.';
+                imageUrl = 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
+                imageCaption = 'العقل العبقري قادر على حل أعقد المشاكل';
             } else if (score >= 70) {
                 resultClass = 'good';
-                title = 'نتيجة جيدة!';
-                message = 'مستوى ذكاءك فوق المتوسط، لديك قدرات جيدة';
+                title = 'نتيجة ممتازة';
+                message = 'مستوى ذكاءك فوق المتوسط! لديك قدرات عقلية مميزة وتستطيع تطويرها أكثر.';
+                imageUrl = 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
+                imageCaption = 'التفكير الإبداعي مفتاح النجاح';
             } else if (score >= 50) {
                 resultClass = 'average';
-                title = 'نتيجة مقبولة';
-                message = 'مستوى ذكاءك متوسط، يمكنك تطوير مهاراتك أكثر';
+                title = 'نتيجة جيدة';
+                message = 'مستوى ذكاءك متوسط. مع الممارسة والتعلم يمكنك تطوير قدراتك العقلية بشكل كبير.';
+                imageUrl = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
+                imageCaption = 'التعلم المستمر يطور القدرات العقلية';
             } else {
                 resultClass = 'poor';
                 title = 'يحتاج تحسين';
-                message = 'مستوى ذكاءك أقل من المتوسط، ننصحك بالتدرب أكثر';
+                message = 'يمكنك تحسين نتيجتك بالتدرب وحل المزيد من الاختبارات. الذكاء مهارة يمكن تطويرها.';
+                imageUrl = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
+                imageCaption = 'العمل الجماعي والتعلم يطوران المهارات';
             }
             
             resultContainer.innerHTML = `
                 <h2 class="result-title">${title}</h2>
                 <div class="result-score ${resultClass}">${score}/100</div>
                 <p class="result-message">${message}</p>
+                <img src="${imageUrl}" alt="صورة النتيجة" class="result-image">
+                <p class="image-caption">${imageCaption}</p>
             `;
         });
     </script>
